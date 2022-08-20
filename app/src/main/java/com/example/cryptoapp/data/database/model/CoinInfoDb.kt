@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "full_price_list")
 data class CoinInfoDb(
     @PrimaryKey
-    val fromSymbol: String?,
+    val fromSymbol: String,
     val toSymbol: String?,
     val price: String?,
     val lowDay: String?,

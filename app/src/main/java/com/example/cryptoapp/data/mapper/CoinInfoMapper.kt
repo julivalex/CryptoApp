@@ -62,6 +62,6 @@ object CoinInfoMapper {
     fun mapNamesListToString(coinNamesList: CoinNamesListDto): String {
         return coinNamesList.coinNames?.map {
             it.coinName?.name
-        }?.joinToString().orEmpty()
+        }?.joinToString(",").orEmpty()
     }
 }

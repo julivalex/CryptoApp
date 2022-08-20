@@ -1,36 +1,35 @@
 package com.example.cryptoapp.presentation.activity
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.example.cryptoapp.presentation.viewmodel.CoinViewModel
 import com.example.cryptoapp.R
 import com.example.cryptoapp.presentation.adapter.CoinInfoAdapter
-import com.example.cryptoapp.data.network.model.CoinInfoDto
+import com.example.cryptoapp.domain.model.CoinInfoEntity
 import kotlinx.android.synthetic.main.activity_coin_prce_list.rvCoinPriceList
 
 class CoinPriceListActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: CoinViewModel
+    private val viewModel by viewModels<CoinViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coin_prce_list)
-        val adapter = CoinInfoAdapter(this)
+        val adapter = CoinInfoAdapter(context = this)
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
-            override fun onCoinClick(coinPriceInfo: CoinInfoDto) {
+            override fun onCoinClick(coinPriceInfo: CoinInfoEntity) {
                 val intent = CoinDetailActivity.newIntent(
-                    this@CoinPriceListActivity,
-                    coinPriceInfo.fromSymbol
+                    context = this@CoinPriceListActivity,
+                    fromSymbol = coinPriceInfo.fromSymbol.orEmpty()
                 )
                 startActivity(intent)
             }
         }
         rvCoinPriceList.adapter = adapter
-        viewModel = ViewModelProviders.of(this)[CoinViewModel::class.java]
-        viewModel.priceList.observe(this, Observer {
+        viewModel.coinInfoList.observe(this) {
             adapter.coinInfoList = it
-        })
+        }
     }
 }
