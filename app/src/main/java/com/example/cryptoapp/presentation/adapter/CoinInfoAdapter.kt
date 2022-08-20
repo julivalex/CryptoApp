@@ -37,7 +37,7 @@ class CoinInfoAdapter(
 
     override fun onBindViewHolder(holder: CoinInfoViewHolder, position: Int) {
         val coin: CoinInfoEntity = coinInfoList[position]
-        with(binding) {
+        with(holder.binding) {
             with(coin) {
                 val symbolsTemplate = context.resources.getString(R.string.symbols_template)
                 val lastUpdateTemplate = context.resources.getString(R.string.last_update_template)
