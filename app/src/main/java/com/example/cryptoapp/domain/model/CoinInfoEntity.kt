@@ -6,7 +6,7 @@ data class CoinInfoEntity(
     val highDay: String?,
     val lastMarket: String?,
     val lastUpdate: String,
-    val fromSymbol: String?,
+    val fromSymbol: String,
     val toSymbol: String?,
     val imageUrl: String
 )
