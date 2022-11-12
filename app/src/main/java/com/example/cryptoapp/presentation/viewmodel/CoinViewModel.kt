@@ -3,14 +3,11 @@ package com.example.cryptoapp.presentation.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
-import com.example.cryptoapp.data.database.model.CoinInfoDb
 import com.example.cryptoapp.data.repository.CoinRepositoryImpl
 import com.example.cryptoapp.domain.model.CoinInfoEntity
 import com.example.cryptoapp.domain.usecase.GetCoinInfoListUseCase
 import com.example.cryptoapp.domain.usecase.GetCoinInfoUseCase
 import com.example.cryptoapp.domain.usecase.LoadDataUseCase
-import kotlinx.coroutines.launch
 
 class CoinViewModel(application: Application) : AndroidViewModel(application) {
 
