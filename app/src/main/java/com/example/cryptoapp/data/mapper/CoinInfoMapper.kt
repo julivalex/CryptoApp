@@ -9,8 +9,9 @@ import com.google.gson.Gson
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-object CoinInfoMapper {
+class CoinInfoMapper @Inject constructor() {
 
     private fun mapDtoToDb(dto: CoinInfoDto): CoinInfoDb = with(dto) {
         CoinInfoDb(
@@ -79,5 +80,7 @@ object CoinInfoMapper {
         return sdf.format(date)
     }
 
-    private const val BASE_IMAGE_URL = "https://cryptocompare.com"
+    companion object {
+        private const val BASE_IMAGE_URL = "https://cryptocompare.com"
+    }
 }

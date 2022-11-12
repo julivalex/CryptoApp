@@ -12,20 +12,21 @@ import kotlinx.coroutines.delay
 
 class RefreshDataWorker(
     val context: Context,
-    private val workerParameters: WorkerParameters
-): CoroutineWorker(context, workerParameters) {
+    private val workerParameters: WorkerParameters,
+) : CoroutineWorker(context, workerParameters) {
 
     private val coinInfoDao = AppDatabase.getInstance(context).coinPriceInfoDao()
     private val apiService = ApiFactory.apiService
+    private val mapper = CoinInfoMapper()
 
     override suspend fun doWork(): Result {
         while (true) {
             try {
                 val topCoins = apiService.getTopCoinsInfo(limit = 50)
-                val fromSymbols = CoinInfoMapper.mapNamesListToString(topCoins)
+                val fromSymbols = mapper.mapNamesListToString(topCoins)
                 val jsonContainer = apiService.getFullPriceList(fSyms = fromSymbols)
-                val coinInfoDtoList = CoinInfoMapper.mapJsonToCoinInfo(jsonContainer)
-                val coinInfoDbList = CoinInfoMapper.mapListDtoToDb(coinInfoDtoList)
+                val coinInfoDtoList = mapper.mapJsonToCoinInfo(jsonContainer)
+                val coinInfoDbList = mapper.mapListDtoToDb(coinInfoDtoList)
                 coinInfoDao.insertPriceList(coinInfoDbList)
             } catch (e: Exception) {
             }

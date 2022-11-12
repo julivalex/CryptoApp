@@ -1,5 +1,6 @@
 package com.example.cryptoapp.presentation.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,16 +8,29 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.cryptoapp.databinding.FragmentCoinDetailBinding
+import com.example.cryptoapp.di.ViewModelFactory
+import com.example.cryptoapp.presentation.CoinApp
 import com.example.cryptoapp.presentation.viewmodel.CoinViewModel
 import com.squareup.picasso.Picasso
+import javax.inject.Inject
 
 class CoinDetailFragment : Fragment() {
 
-    private val viewModel by viewModels<CoinViewModel>()
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val viewModel by viewModels<CoinViewModel> { factory }
+
+    private val component by lazy { (requireActivity().application as CoinApp).component }
 
     private var _binding: FragmentCoinDetailBinding? = null
     private val binding: FragmentCoinDetailBinding
         get() = _binding ?: throw RuntimeException("FragmentCoinDetailBinding == null")
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
