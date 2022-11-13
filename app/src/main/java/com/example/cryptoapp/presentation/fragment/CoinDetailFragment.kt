@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.cryptoapp.databinding.FragmentCoinDetailBinding
-import com.example.cryptoapp.di.ViewModelFactory
+import com.example.cryptoapp.presentation.viewmodel.ViewModelFactory
 import com.example.cryptoapp.presentation.CoinApp
 import com.example.cryptoapp.presentation.viewmodel.CoinViewModel
 import com.squareup.picasso.Picasso

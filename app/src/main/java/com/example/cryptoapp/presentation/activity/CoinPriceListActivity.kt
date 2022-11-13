@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.cryptoapp.R
 import com.example.cryptoapp.presentation.viewmodel.CoinViewModel
 import com.example.cryptoapp.databinding.ActivityCoinPriceListBinding
-import com.example.cryptoapp.di.ViewModelFactory
+import com.example.cryptoapp.presentation.viewmodel.ViewModelFactory
 import com.example.cryptoapp.presentation.adapter.CoinInfoAdapter
 import com.example.cryptoapp.domain.model.CoinInfoEntity
 import com.example.cryptoapp.presentation.CoinApp
